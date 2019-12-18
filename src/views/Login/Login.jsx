@@ -27,6 +27,11 @@ function Copyright() {
   );
 }
 
+function onClickedLogin() {
+  console.log('clicked');
+
+}
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -93,6 +98,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={onClickedLogin}
           >
             Sign In
           </Button>
