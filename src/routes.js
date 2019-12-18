@@ -7,6 +7,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
+
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
@@ -18,6 +19,7 @@ import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import Login from "views/Login/Login.jsx";
 import Register from "views/UserRegister/Register.jsx";
+import SeletItems from "views/SelectItems/SelectItems.jsx";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -52,6 +54,15 @@ const dashboardRoutes = [
     rtlName: "ملف تعريفي للمستخدم",
     icon: Person,
     component: Login,
+    layout: "/admin"
+  },
+
+  {
+    path: "/items",
+    name: "Select Items",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Person,
+    component: SeletItems,
     layout: "/admin"
   },
   {

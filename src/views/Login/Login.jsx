@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -27,6 +27,7 @@ function Copyright() {
   );
 }
 
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -48,10 +49,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignIn() {
+  const [email, setEmail] =useState("");
+  const [password, setPassword] =useState("");
   const classes = useStyles();
 
+  function handleSubmit(event){
+    console.log(email);
+    console.log(password);
+    event.preventDefault();
+  }
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" onSubmit={handleSubmit}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -71,6 +79,8 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -82,6 +92,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

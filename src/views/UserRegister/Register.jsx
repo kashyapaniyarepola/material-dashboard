@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -47,10 +47,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Register() {
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [repassword, setRePassword] = useState('');
   const classes = useStyles();
 
+  function handleSubmit(event){
+    console.log(firstname,lastname);
+    console.log(email);
+    console.log(password);
+    console.log(repassword);
+    event.preventDefault();
+  }
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" onSubmit={handleSubmit}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -71,6 +84,8 @@ export default function Register() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                value={firstname}
+                onChange={e => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,6 +97,8 @@ export default function Register() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                value={lastname}
+                onChange={e => setLastName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,6 +110,8 @@ export default function Register() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,6 +124,8 @@ export default function Register() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </Grid>           
             <Grid item xs={12}>
@@ -112,11 +133,13 @@ export default function Register() {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
+                name="re-password"
                 label="Re-Password"
                 type="password"
-                id="password"
+                id="repassword"
                 autoComplete="current-password"
+                value={repassword}
+                onChange={e => setRePassword(e.target.value)}
               />
             </Grid>
 
