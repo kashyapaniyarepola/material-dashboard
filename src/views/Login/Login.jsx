@@ -27,10 +27,6 @@ function Copyright() {
   );
 }
 
-function onClickedLogin() {
-  console.log('clicked');
-
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -109,7 +105,6 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onClickedLogin}
           >
             Sign In
           </Button>
