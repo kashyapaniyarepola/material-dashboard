@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -12,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 function Copyright() {
   return (
@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 export default function Register() {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -54,16 +55,45 @@ export default function Register() {
   const [repassword, setRePassword] = useState('');
   const classes = useStyles();
 
-  function handleSubmit(event){
-    console.log(firstname,lastname);
-    console.log(email);
-    console.log(password);
-    console.log(repassword);
-    event.preventDefault();
+  function handleFirstNameChange(event){
+    setFirstName(event.target.value);
   }
+  function handleLastNameChange(event){
+    setLastName(event.target.value);
+  }
+  function handleEmailChange(event){
+      setEmail(event.target.value);
+  }
+  function handlePasswordChange(event){
+    setPassword(event.target.value);
+  }
+  function handleRePasswordChange(event){
+    setRePassword(event.target.value);
+  }
+  function handleSubmit(event)  {
+    if (handlePassword(event)){
+      console.log(firstname,lastname);
+      console.log(email);
+      console.log(password, repassword);
+      event.preventDefault();
+    }
+    else {
+      alert('password didnt match');
+    }
+    
+  }
+  function handlePassword(event){
+    if (password===repassword){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  
 
   return (
-    <Container component="main" maxWidth="xs" onSubmit={handleSubmit}>
+    <Container component="main" maxWidth="xs" >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -72,10 +102,13 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <ValidatorForm
+                onSubmit={handleSubmit}
+                className={classes.form}
+            >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextValidator
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -84,12 +117,13 @@ export default function Register() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                value={firstname}
-                onChange={e => setFirstName(e.target.value)}
+                validators={['required']}
+                value={firstname} 
+                onChange={handleFirstNameChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextValidator
                 variant="outlined"
                 required
                 fullWidth
@@ -97,12 +131,13 @@ export default function Register() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                validators={['required']}
                 value={lastname}
-                onChange={e => setLastName(e.target.value)}
+                onChange={handleLastNameChange}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextValidator
                 variant="outlined"
                 required
                 fullWidth
@@ -110,12 +145,13 @@ export default function Register() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                validators={['required','isEmail']}
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={handleEmailChange}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextValidator
                 variant="outlined"
                 required
                 fullWidth
@@ -124,12 +160,14 @@ export default function Register() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                validators={['required','matchRegexp:^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[0-9a-zA-Z].{8,}$']}
+                errorMessages={['Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters']}
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
               />
             </Grid>           
             <Grid item xs={12}>
-              <TextField
+              <TextValidator
                 variant="outlined"
                 required
                 fullWidth
@@ -137,15 +175,16 @@ export default function Register() {
                 label="Re-Password"
                 type="password"
                 id="repassword"
+                validators={['required']} 
                 autoComplete="current-password"
                 value={repassword}
-                onChange={e => setRePassword(e.target.value)}
+                onChange={handleRePasswordChange}
               />
             </Grid>
 
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={<Checkbox value="allowExtraEmails" color="primary" required/>}
                 label="Agree to our terms and conditions."
               />
             </Grid>
@@ -166,7 +205,7 @@ export default function Register() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </ValidatorForm>
       </div>
       <Box mt={5}>
         <Copyright />

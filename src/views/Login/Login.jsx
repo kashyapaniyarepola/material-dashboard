@@ -2,7 +2,6 @@ import React , {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -12,7 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {Redirect } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -53,13 +53,29 @@ export default function SignIn() {
   const [password, setPassword] =useState("");
   const classes = useStyles();
 
-  function handleSubmit(event){
-    console.log(email);
-    console.log(password);
-    event.preventDefault();
+  function handleEmailChange(event){
+    setEmail(event.target.value);
   }
+  function handlePasswordChange(event){
+    setPassword(event.target.value);
+  }
+  function handleSubmit(event){
+    localStorage.setItem('token','kashyapaniyarepola');
+    console.log(email,password);
+    event.preventDefault();
+    
+  }
+
+
+  function isAuthenticated(){
+    const token = localStorage.getItem('token');
+    return token && token.length>10;
+    
+}
+const isAllreadyAuthenticated = isAuthenticated();
   return (
-    <Container component="main" maxWidth="xs" onSubmit={handleSubmit}>
+    isAllreadyAuthenticated ? <Redirect to={{pathname: './register'}}/> :(
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -68,8 +84,11 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
+        <ValidatorForm
+                onSubmit={handleSubmit}
+                className={classes.form}
+            >
+          <TextValidator
             variant="outlined"
             margin="normal"
             required
@@ -79,10 +98,11 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            validators={['required','isEmail']}
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           />
-          <TextField
+          <TextValidator
             variant="outlined"
             margin="normal"
             required
@@ -93,7 +113,7 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -120,11 +140,11 @@ export default function SignIn() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+          </ValidatorForm>
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
     </Container>
-  );
+  ));
 }
