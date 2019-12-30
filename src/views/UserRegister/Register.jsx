@@ -51,7 +51,7 @@ export default function Register() {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [nic, setNIC] = useState('');
   const [repassword, setRePassword] = useState('');
   const classes = useStyles();
 
@@ -61,8 +61,8 @@ export default function Register() {
   function handleLastNameChange(event){
     setLastName(event.target.value);
   }
-  function handleEmailChange(event){
-      setEmail(event.target.value);
+  function handleNICChange(event){
+      setNIC(event.target.value);
   }
   function handlePasswordChange(event){
     setPassword(event.target.value);
@@ -73,7 +73,7 @@ export default function Register() {
   function handleSubmit(event)  {
     if (handlePassword(event)){
       console.log(firstname,lastname);
-      console.log(email);
+      console.log(nic);
       console.log(password, repassword);
       event.preventDefault();
     }
@@ -141,13 +141,12 @@ export default function Register() {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                validators={['required','isEmail']}
-                value={email}
-                onChange={handleEmailChange}
+                id="nic"
+                label="NIC"
+                name="nic"
+                validators={['required']}
+                value={nic}
+                onChange={handleNICChange}
               />
             </Grid>
             <Grid item xs={12}>
