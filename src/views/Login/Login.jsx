@@ -51,25 +51,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
-  function handleEmailChange(event) {
-    setEmail(event.target.value);
-    console.log(email);
+  function handleUserNameChange(event) {
+    setUserName(event.target.value);
+    console.log(userName);
   }
   function handlePasswordChange(event) {
     setPassword(event.target.value);
     console.log(password);
   }
   function handleSubmit(event) {
-    console.log(email, password);
-    let userData = {username: email, password: password};
-    axios.post('http://localhost:3001/user/signin', userData)
-      .then(function (response) {
-        console.log(response);
-        localStorage.setItem('token', 'kashyapaniyarepola');
+    console.log(userName, password);
+    let userData = { username: userName, password: password };
+    axios.post('http://localhost:8080/user/signin', userData)
+      .then(function (res) {
+        if (res.status === 422) {
+          throw new Error('Validation failed');
+        }
+        if (res.status !== 200 || res.status !== 201) {
+          console.log('Error');
+          throw new Error("Could'n validate");
+        }
+        console.log(res);
+        return res.json();
+      })
+      .then(resData => {
+        console.log(resData);
+        localStorage.setItem('token', resData.token);
       })
       .catch(function (error) {
         console.log('error');
@@ -105,14 +116,13 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="userName"
+              label="Username"
+              name="userName"
               autoFocus
-              validators={['required', 'isEmail']}
-              value={email}
-              onChange={handleEmailChange}
+              validators={['required']}
+              value={userName}
+              onChange={handleUserNameChange}
             />
             <TextValidator
               variant="outlined"
@@ -160,5 +170,5 @@ export default function SignIn() {
         </Box>
       </Container>
     )
-    );
+  );
 }

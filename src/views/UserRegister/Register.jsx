@@ -11,7 +11,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+//import { Redirect } from 'react-router-dom';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
+const axios = require('axios');
 
 function Copyright() {
   return (
@@ -72,9 +75,9 @@ export default function Register() {
   }
   function handleSubmit(event)  {
     if (handlePassword(event)){
-      console.log(firstname,lastname);
-      console.log(nic);
-      console.log(password, repassword);
+      let userData = { firstname: firstname, lastname: lastname , password: password, nic: nic};
+      axios.post('http://localhost:8080/user/signin', userData)
+      console.log(userData);
       event.preventDefault();
     }
     else {
