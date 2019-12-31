@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 function Copyright() {
