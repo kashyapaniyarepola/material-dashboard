@@ -66,7 +66,7 @@ export default function SignIn() {
   function handleSubmit(event) {
     console.log(email, password);
     let userData = {username: email, password: password};
-    axios.post('http://localhost:3001/user/signin', userData)
+    axios.post('http://localhost:8080/user/signin', userData)
       .then(function (response) {
         console.log(response);
         localStorage.setItem('token', 'kashyapaniyarepola');
