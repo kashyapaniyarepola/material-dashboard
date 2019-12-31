@@ -35,6 +35,58 @@ const dashboardRoutes = [
     rtlName: "لوحة القيادة",
     icon: Dashboard,
     component: DashboardPage,
+    layout: "/user"
+  },
+  {
+    path: "/user",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Person,
+    component: UserProfile,
+    layout: "/user"
+  },
+  {
+    path: "/register",
+    name: "Register",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: VpnKeyIcon,
+    component: Register,
+    layout: "/user"
+  },
+  {
+    path: "/login",
+    name: "Login",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: LockIcon,
+    component: Login,
+    layout: "/user"
+  },
+
+  {
+    path: "/items",
+    name: "Select Items",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: AddShoppingCartIcon,
+    component: SeletItems,
+    layout: "/user"
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    rtlName: "إخطارات",
+    icon: Notifications,
+    component: NotificationsPage,
+    layout: "/user"
+  },
+
+];
+const adminRoutes = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: DashboardPage,
     layout: "/admin"
   },
   {
@@ -46,31 +98,6 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/register",
-    name: "Register",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: VpnKeyIcon,
-    component: Register,
-    layout: "/admin"
-  },
-  {
-    path: "/login",
-    name: "Login",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: LockIcon,
-    component: Login,
-    layout: "/admin"
-  },
-
-  {
-    path: "/items",
-    name: "Select Items",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: AddShoppingCartIcon,
-    component: SeletItems,
-    layout: "/admin"
-  },
-  {
     path: "/staffmembers",
     name: "Add Staff Members",
     rtlName: "قائمة الجدول",
@@ -79,38 +106,6 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/drivers",
-    name: "Add Drivers",
-    rtlName: "قائمة الجدول",
-    icon: AddCircleIcon,
-    component: AddDrivers,
-    layout: "/admin"
-  },
-  // {
-  //   path: "/typography",
-  //   name: "Typography",
-  //   rtlName: "طباعة",
-  //   icon: LibraryBooks,
-  //   component: Typography,
-  //   layout: "/admin"
-  // },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   rtlName: "الرموز",
-  //   icon: BubbleChart,
-  //   component: Icons,
-  //   layout: "/admin"
-  // },
-  // {
-  //   path: "/maps",
-  //   name: "Maps",
-  //   rtlName: "خرائط",
-  //   icon: LocationOn,
-  //   component: Maps,
-  //   layout: "/admin"
-  // },
-  {
     path: "/notifications",
     name: "Notifications",
     rtlName: "إخطارات",
@@ -118,22 +113,43 @@ const dashboardRoutes = [
     component: NotificationsPage,
     layout: "/admin"
   },
-  // {
-  //   path: "/rtl-page",
-  //   name: "RTL Support",
-  //   rtlName: "پشتیبانی از راست به چپ",
-  //   icon: Language,
-  //   component: RTLPage,
-  //   layout: "/rtl"
-  // },
-  // {
-  //   path: "/upgrade-to-pro",
-  //   name: "Upgrade To PRO",
-  //   rtlName: "التطور للاحترافية",
-  //   icon: Unarchive,
-  //   component: UpgradeToPro,
-  //   layout: "/admin"
-  // }
 ];
 
+const staffadminRoutes = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/staffadmin"
+  },
+  {
+    path: "/user",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Person,
+    component: UserProfile,
+    layout: "/staffadmin"
+  },
+
+  {
+    path: "/drivers",
+    name: "Add Drivers",
+    rtlName: "قائمة الجدول",
+    icon: AddCircleIcon,
+    component: AddDrivers,
+    layout: "/staffadmin"
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    rtlName: "إخطارات",
+    icon: Notifications,
+    component: NotificationsPage,
+    layout: "/staffadmin"
+  },
+
+];
 export default dashboardRoutes;
+export { staffadminRoutes, adminRoutes };
