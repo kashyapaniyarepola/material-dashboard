@@ -11,6 +11,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+//import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select'
 //import { Redirect } from 'react-router-dom';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
@@ -43,29 +48,62 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
+    
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    width: '100%',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
 
 export default function Register() {
+  const [username, setUserName] = useState('');
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [nic, setNIC] = useState('');
+  const [custype, setcustype] = useState('');
+  const [streetname, setStreetName] = useState('');
+  const [streetno, setStreetNo] = useState('');
+  const [city, setCity] = useState('');
+  const [phonenumber, setPhoneNumber] = useState('');
   const [repassword, setRePassword] = useState('');
   const classes = useStyles();
 
+  function handleUserNameChange(event){
+    setUserName(event.target.value);
+  }
   function handleFirstNameChange(event){
     setFirstName(event.target.value);
   }
   function handleLastNameChange(event){
     setLastName(event.target.value);
   }
+  function  handleCustomerType(event){
+    setcustype(event.target.value);
+  }
+  function  handlePhoneNumberChange(event){
+    setPhoneNumber(event.target.value);
+  }
+  function  handleCityChange(event){
+    setCity(event.target.value);
+  }
+  function  handleStreetNameChange(event){
+    setStreetName(event.target.value);
+  }
+  function  handleStreetNoChange(event){
+    setStreetNo(event.target.value);
+  }
   function handleNICChange(event){
-      setNIC(event.target.value);
+    setNIC(event.target.value);
   }
   function handlePasswordChange(event){
     setPassword(event.target.value);
@@ -75,8 +113,22 @@ export default function Register() {
   }
   function handleSubmit(event)  {
     if (handlePassword(event)){
-      let userData = { firstname: firstname, lastname: lastname , password: password, nic: nic};
-      axios.post('http://localhost:8080/user/signin', userData)
+      let userData = { username:username,firstname: firstname, lastname: lastname , password: password, nic: nic , city: city, streetname: streetname, streetno: streetno, phonenumber: phonenumber};
+      if (custype==="Wholeseller"){
+        axios.post('http://localhost:8080/user/registerWholeSeller', userData)
+      }
+      else if (custype==="registerRetailer"){
+        axios.post('http://localhost:8080/user/registerWholeSeller', userData)
+      }
+      else if (custype==="Retailer"){
+        axios.post('http://localhost:8080/user/registerRetailer', userData)
+      }
+      else if (custype==="EndCustomer"){
+        axios.post('http://localhost:8080/user/registerEndCustomer', userData)
+      }
+      else{
+        axios.post('http://localhost:8080/user/register', userData)
+      }
       console.log(userData);
       event.preventDefault();
     }
@@ -152,7 +204,92 @@ export default function Register() {
                 onChange={handleNICChange}
               />
             </Grid>
+            <Grid item xs={12} >
+              <TextValidator
+                variant="outlined"
+                required
+                fullWidth
+                id="city"
+                label="City"
+                name="city"
+                validators={['required']}
+                value={city}
+                onChange={handleCityChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                variant="outlined"
+                required
+                fullWidth
+                id="streetno"
+                label="Street Number"
+                name="streetno"
+                validators={['required']}
+                value={streetno}
+                onChange={handleStreetNoChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                variant="outlined"
+                required
+                fullWidth
+                id="streetname"
+                label="Street Name"
+                name="streetname"
+                validators={['required']}
+                value={streetname}
+                onChange={handleStreetNameChange}
+              />
+            </Grid>
+
             <Grid item xs={12}>
+              <TextValidator
+                variant="outlined"
+                required
+                fullWidth
+                id="phonenumber"
+                label="Phone Number"
+                name="phonenumber"
+                validators={['required']}
+                value={phonenumber}
+                onChange={handlePhoneNumberChange}
+              />
+            </Grid>
+            <Grid item xs={12} >
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                <Select
+                  variant="outlined"
+                  required
+                  fullWidth
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={custype}
+                  validators={['required']}
+                  onChange={handleCustomerType}
+                >
+                  <MenuItem value={'Wholeseller'}>Wholeseller</MenuItem>
+                  <MenuItem value={'Retailer'}>Retailer</MenuItem>
+                  <MenuItem value={'EndCustomer'}>EndCustomer</MenuItem>
+                </Select>
+            </FormControl>
+            </Grid>
+            <Grid item xs={12} >
+              <TextValidator
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="UserName"
+                name="username"
+                validators={['required']}
+                value={username}
+                onChange={handleUserNameChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <TextValidator
                 variant="outlined"
                 required
@@ -162,13 +299,13 @@ export default function Register() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                validators={['required','matchRegexp:^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[0-9a-zA-Z].{8,}$']}
+                validators={['required','matchRegexp:^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>])[0-9a-zA-Z].{8,}$']}
                 errorMessages={['Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters']}
                 value={password}
                 onChange={handlePasswordChange}
               />
             </Grid>           
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextValidator
                 variant="outlined"
                 required
