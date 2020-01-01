@@ -51,16 +51,18 @@ export default function AdminNavbarLinks(props) {
   };
   const handleCloseProfile = () => {
     localStorage.removeItem('token');
+    props.history.push('/user');
     setOpenProfile(null);
   };
 
-  // function isAuthenticated() {
-  //   const token = localStorage.getItem('token');
-  //   return token && token.length > 10;
+  function isAuthenticated() {
+    const token = localStorage.getItem('token');
+    return token && token.length > 10;
 
-  // }
-  // const isAllreadyAuthenticated = isAuthenticated();
+  }
+  const isAllreadyAuthenticated = isAuthenticated();
   return (
+    !isAllreadyAuthenticated ? <div></div> : (
     <div>
       <div className={classes.searchWrapper}>
         <CustomInput
@@ -213,12 +215,12 @@ export default function AdminNavbarLinks(props) {
                     >
                       Profile
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                      // onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
                     <MenuItem
                       onClick={handleCloseProfile}
@@ -234,6 +236,6 @@ export default function AdminNavbarLinks(props) {
         </Poppers>
       </div>
     </div> 
-    
+    )
   );
 }

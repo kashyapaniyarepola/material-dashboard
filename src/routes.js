@@ -25,6 +25,7 @@ import Register from "views/UserRegister/Register.jsx";
 import SeletItems from "views/SelectItems/SelectItems.jsx";
 import AddStaffMembers from "views/AddStaffMembers/AddStaffMembers.jsx";
 import AddDrivers from "views/AddDrivers/AddDrivers.jsx";
+import DriverAssign from "views/DriverAssign/DriverAssign.jsx";
 // core components/views for RTL layout
 //import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -160,7 +161,14 @@ const staffadminRoutes = [
     component: UserProfile,
     layout: "/staffadmin"
   },
-
+  {
+    path: "/driverassign",
+    name: "DriverAssign",
+    rtlName: "لوحة القيادة",
+    icon: AddCircleOutlineIcon,
+    component: DriverAssign,
+    layout: "/staffadmin"
+  },
   {
     path: "/drivers",
     name: "Add Drivers",
