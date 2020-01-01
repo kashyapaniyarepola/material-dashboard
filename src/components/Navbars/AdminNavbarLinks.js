@@ -10,6 +10,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Hidden from "@material-ui/core/Hidden";
 import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
+//import Link from '@material-ui/core/Link';
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
@@ -19,11 +20,17 @@ import Search from "@material-ui/icons/Search";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
+import { Redirect } from 'react-router-dom';
+
+
+
+//import { Redirect } from 'react-router-dom';
+
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function AdminNavbarLinks() {
+export default function AdminNavbarLinks(props) {
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
@@ -44,10 +51,20 @@ export default function AdminNavbarLinks() {
       setOpenProfile(event.currentTarget);
     }
   };
-  const handleCloseProfile = () => {
+  function handleCloseProfile() {
+    localStorage.removeItem('token');
+    //props.history.push('./user');
     setOpenProfile(null);
   };
+
+  function isAuthenticated() {
+    const token = localStorage.getItem('token');
+    return token && token.length > 10;
+
+  }
+  const isAllreadyAuthenticated = isAuthenticated();
   return (
+    !isAllreadyAuthenticated ? <Redirect to={{ pathname: '/user' }} />  : (
     <div>
       <div className={classes.searchWrapper}>
         <CustomInput
@@ -155,6 +172,7 @@ export default function AdminNavbarLinks() {
           )}
         </Poppers>
       </div>
+      
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -191,20 +209,20 @@ export default function AdminNavbarLinks() {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
+                <ClickAwayListener >
                   <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseProfile}
+                    {/* <MenuItem
+                      onClick={handleProfile}
                       className={classes.dropdownItem}
                     >
                       Profile
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseProfile}
+                    </MenuItem> */}
+                    {/* <MenuItem
+                     // onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
                     <MenuItem
                       onClick={handleCloseProfile}
@@ -219,6 +237,7 @@ export default function AdminNavbarLinks() {
           )}
         </Poppers>
       </div>
-    </div>
+    </div> 
+    )
   );
 }

@@ -25,6 +25,7 @@ import Register from "views/UserRegister/Register.jsx";
 import SeletItems from "views/SelectItems/SelectItems.jsx";
 import AddStaffMembers from "views/AddStaffMembers/AddStaffMembers.jsx";
 import AddDrivers from "views/AddDrivers/AddDrivers.jsx";
+import DriverAssign from "views/DriverAssign/DriverAssign.jsx";
 // core components/views for RTL layout
 //import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -35,14 +36,6 @@ const dashboardRoutes = [
     rtlName: "لوحة القيادة",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/user"
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-    component: UserProfile,
     layout: "/user"
   },
   {
@@ -77,6 +70,42 @@ const dashboardRoutes = [
     icon: Notifications,
     component: NotificationsPage,
     layout: "/user"
+  },
+
+];
+const loggedUserRoutes = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/loggeduser"
+  },
+  {
+    path: "/user",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Person,
+    component: UserProfile,
+    layout: "/loggeduser"
+  },
+
+  {
+    path: "/items",
+    name: "Select Items",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: AddShoppingCartIcon,
+    component: SeletItems,
+    layout: "/loggeduser"
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    rtlName: "إخطارات",
+    icon: Notifications,
+    component: NotificationsPage,
+    layout: "/loggeduser"
   },
 
 ];
@@ -132,7 +161,14 @@ const staffadminRoutes = [
     component: UserProfile,
     layout: "/staffadmin"
   },
-
+  {
+    path: "/driverassign",
+    name: "DriverAssign",
+    rtlName: "لوحة القيادة",
+    icon: AddCircleOutlineIcon,
+    component: DriverAssign,
+    layout: "/staffadmin"
+  },
   {
     path: "/drivers",
     name: "Add Drivers",
@@ -152,4 +188,4 @@ const staffadminRoutes = [
 
 ];
 export default dashboardRoutes;
-export { staffadminRoutes, adminRoutes };
+export { staffadminRoutes, adminRoutes,loggedUserRoutes };

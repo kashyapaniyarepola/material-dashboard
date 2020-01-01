@@ -1,11 +1,12 @@
 import React from 'react';
 import MaterialTable from 'material-table';
+const axios = require('axios');
 
 export default function AddStaffMembers() {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Name', field: 'name' },
-      { title: 'Email', field: 'email' },
+      { title: 'Username', field: 'username' },
       { title: 'Position', field: 'position' },
       {
         title: 'Login ID',
@@ -15,10 +16,10 @@ export default function AddStaffMembers() {
       },
     ],
     data: [
-      { name: 'Bhashana Elikewela', email: 'hbhashana@gmail.com', position: 'junior memeber', loginid: 63 },
+      { name: 'Bhashana Elikewela', username: 'hbhashana', position: 'junior memeber', loginid: 63 },
       {
         name: 'Kashyapa Niyarrepola',
-        email: 'kashyapaniyarepola@gmail.com',
+        username: 'kashyapaniyarepola',
         position: 'senior staff member',
         loginid: 34,
       },
@@ -37,6 +38,8 @@ export default function AddStaffMembers() {
               setState(prevState => {
                 const data = [...prevState.data];
                 data.push(newData);
+                let userData={username : newData.username , password : newData.loginid , city : newData.area}
+                axios.post('http://localhost:8080/user/registerWholeSeller', userData)
                 return { ...prevState, data };
               });
             }, 600);

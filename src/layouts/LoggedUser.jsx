@@ -10,7 +10,7 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import Navbar from "components/Navbars/Navbar.js";
 
-import routes  from "routes.js";
+import { loggedUserRoutes as routes }  from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -22,7 +22,7 @@ let ps;
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-      if (prop.layout === "/user") {
+      if (prop.layout === "/loggeduser") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -33,7 +33,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/user" to="/user/dashboard" />
+    <Redirect from="/loggeduser" to="/loggeduser/dashboard" />
   </Switch>
 );
 
@@ -105,7 +105,18 @@ export default function User({ ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
          <Navbar
-          routes={routes}
+          routes={routes.map((prop, key) => {
+            if (prop.layout === "/loggeduser") {
+              return (
+                <Route
+                  path={prop.layout + prop.path}
+                  component={prop.component}
+                  key={key}
+                />
+              );
+            }
+            return null;
+          })}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         /> 

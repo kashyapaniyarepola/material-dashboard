@@ -1,11 +1,12 @@
 import React from 'react';
 import MaterialTable from 'material-table';
+const axios = require('axios');
 
 export default function AddStaffMembers() {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Name', field: 'name' },
-      { title: 'Email', field: 'email' },
+      { title: 'Username', field: 'username' },
       { title: 'Position', field: 'position' },
       { title: 'Area', field: 'area' },
       {
@@ -16,10 +17,10 @@ export default function AddStaffMembers() {
       },
     ],
     data: [
-      { name: 'Hiruna Kumara', email:'umara@gmail.com', position: 'driver', area: 'Kandy',loginid: 63 },
+      { name: 'Hiruna Kumara', username:'kumara', position: 'driver', area: 'Kandy',loginid: 63 },
       {
         name: 'Rukmal Senavirathana',
-        email: 'rukmala@gmail.com',
+        username: 'rukmal',
         position: 'driver assistant',
         area :'Colombo',
         loginid: 34,
@@ -28,7 +29,7 @@ export default function AddStaffMembers() {
   });
  return (
     <MaterialTable
-      title="Add Drivers"
+      title="Add Drivers and Assistant"
       columns={state.columns}
       data={state.data}
       editable={{
@@ -39,6 +40,13 @@ export default function AddStaffMembers() {
               setState(prevState => {
                 const data = [...prevState.data];
                 data.push(newData);
+                let userData={username : newData.username , password : newData.loginid , city : newData.area}
+                if (newData.position ==='driver'){
+                  axios.post('http://localhost:8080/user/registerWholeSeller', userData)
+                }
+                else{
+                  axios.post('http://localhost:8080/user/registerWholeSeller', userData)
+                }
                 return { ...prevState, data };
               });
             }, 600);

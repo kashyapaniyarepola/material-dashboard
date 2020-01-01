@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Redirect } from 'react-router-dom';
 
+
 const axios = require('axios');
 
 function Copyright() {
@@ -50,11 +51,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
+  console.log(props)
   function handleUserNameChange(event) {
     setUserName(event.target.value);
     console.log(userName);
@@ -68,19 +70,29 @@ export default function SignIn() {
     let userData = { username: userName, password: password };
     axios.post('http://localhost:8080/user/signin', userData)
       .then(function (res) {
+        console.log(res.status);
         if (res.status === 422) {
           throw new Error('Validation failed');
         }
-        if (res.status !== 200 || res.status !== 201) {
+        if (!(res.status === 200 || res.status === 201)) {
           console.log('Error');
           throw new Error("Could'n validate");
         }
         console.log(res);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('username', res.data.username);
+        localStorage.setItem('firstname', res.data.firstname);
+        localStorage.setItem('lastname', res.data.lastname);
+        localStorage.setItem('userType', res.data.userType);
+        localStorage.setItem('city', res.data.city);
+        localStorage.setItem('streetnumber', res.data.number);
+        localStorage.setItem('streetname', res.data.street);
+       props.history.push('/loggeduser');
         return res.json();
       })
       .then(resData => {
         console.log(resData);
-        localStorage.setItem('token', resData.token);
+        localStorage.setItem('token', resData.data.token);
       })
       .catch(function (error) {
         console.log('error');
@@ -92,12 +104,12 @@ export default function SignIn() {
 
   function isAuthenticated() {
     const token = localStorage.getItem('token');
-    return token && token.length > 10;
+    return token && token.length > 8;
 
   }
   const isAllreadyAuthenticated = isAuthenticated();
   return (
-    isAllreadyAuthenticated ? <Redirect to={{ pathname: './dashboard' }} /> : (
+    isAllreadyAuthenticated ? <Redirect to={{ pathname: '/loggeduser' }} /> : (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
