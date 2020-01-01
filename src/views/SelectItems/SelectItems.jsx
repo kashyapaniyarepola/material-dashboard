@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import { Dropdown } from 'react-bootstrap';
 // import { mysql } from "react";
 import './SelectItems.css';
+import './SecondButton.jsx';
+import SecondButton from "./SecondButton";
 // const mysql = require('mysql');
 // const connection = mysql.createPool({
 //   host     : 'localhost',
@@ -21,16 +23,18 @@ import './SelectItems.css';
 //     </div>
 //   );
 // }
-function secondButton() {
-  return (
-    <Dropdown.Menu>
-      <Dropdown.Item value="1">Action</Dropdown.Item>
-      <Dropdown.Item value="2">Another action</Dropdown.Item>
-      <Dropdown.Item value="3">Something else</Dropdown.Item>
-    </Dropdown.Menu>
+// function secondButton() {
+//   return (
+//     <Dropdown.Menu>
+//       <Dropdown.Item value="1">Action</Dropdown.Item>
+//       <Dropdown.Item value="2">Another action</Dropdown.Item>
+//       <Dropdown.Item value="3">Something else</Dropdown.Item>
+//     </Dropdown.Menu>
 
-  )
-}
+//   )
+// }
+
+
 {/* <div>
   <select defaultValue={this.state.selectValue}
     onChange={this.handleChange}
@@ -61,28 +65,29 @@ function secondButton() {
 // }
 // }
 function hiddenButton() {
-  return (
-    < div >
-      {/* <h1>test 1</h1> */}
-      {/* <Dropdown.Menu>
+    return (
+      < div >
+        {/* <h1>test 1</h1> */}
+        {/* <Dropdown.Menu>
         <Dropdown.Item value="1">Action</Dropdown.Item>
         <Dropdown.Item value="2">Another action</Dropdown.Item>
         <Dropdown.Item value="3">Something else</Dropdown.Item>
       </Dropdown.Menu> */}
 
-      <Dropdown id="buttonItems">
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Item
+        <Dropdown id="buttonItems">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Item
         </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-        </Dropdown.Menu>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
 
-      </Dropdown>
-    </div >
-  )
+        </Dropdown>
+      </div >
+    );
+  
 }
 function checkAlert(evt) {
   if (evt.target.value === "2") {
@@ -95,7 +100,7 @@ class SelectItems extends Component {
   // var mysql = require('mysql');
   submit = (event) => {
     console.log('Selected value:', event.target.value);
-    { hiddenButton() };
+    run:SecondButton();
   }
   render() {
     return (
@@ -110,7 +115,7 @@ class SelectItems extends Component {
         </Dropdown.Toggle>
               </Dropdown> */}
               {/* <select id = "dropdown" ref = {(input)=> this.menu = input}> */}
-              <select id="dropdown" className="abc" onChange={this.submit}>
+            <select id="dropdown" className="abc" onChange={this.submit.run}  >
                 <option value="N/A" >N/A</option>
                 <option value="1">1</option>
                 <option value="2" >2</option>
@@ -142,8 +147,11 @@ class SelectItems extends Component {
               </Dropdown>
             </li> */}
             <li>
-              {hiddenButton()}
+              <div className="secBtn"></div>
+              {/* {hiddenButton()} */}
+              {/* <SecondButton/> */}
             </li>
+            
           </ul>
           {/* </div> */}
         </div>
