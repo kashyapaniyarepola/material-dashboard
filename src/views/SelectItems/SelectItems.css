@@ -1,7 +1,7 @@
-ul.header {
+ ul.header {
     /* background-color: rgb(67, 109, 224); */
     padding: 0px;
-    padding-block: 50px;
+    padding-block: 0px;
     display: inline;
   }
 ul.header li {
@@ -15,4 +15,4 @@ ul.header li {
   }
   .buttonCategoryList{
       padding-right: 20px;
-  }
+  } 
