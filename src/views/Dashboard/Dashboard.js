@@ -17,7 +17,7 @@ import React from "react";
 // import Code from "@material-ui/icons/Code";
 // import Cloud from "@material-ui/icons/Cloud";
 // // core components
-// import GridItem from "components/Grid/GridItem.js";
+ import GridItem from "components/Grid/GridItem.js";
 // import GridContainer from "components/Grid/GridContainer.js";
 // import Table from "components/Table/Table.js";
 // import Tasks from "components/Tasks/Tasks.js";
@@ -40,9 +40,9 @@ export default function Dashboard() {
  // const classes = useStyles();
   return (
     <div>
-     < h4>
-      Welcome to supply management system
-     </h4>
+     <GridItem>
+     <h3> Welcome to supply management system</h3>
+      </GridItem>
 
     </div>
   );

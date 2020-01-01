@@ -116,21 +116,46 @@ export default function Register(props) {
       let userData = { username:username,firstname: firstname, lastname: lastname , password: password, nic: nic , city: city, streetname: streetname, streetno: streetno, phonenumber: phonenumber};
       if (custype==="Wholeseller"){
         axios.post('http://localhost:8080/user/registerWholeSeller', userData)
+        .then(function (res) {
+
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/loggeduser');
+        })
       }
       else if (custype==="registerRetailer"){
         axios.post('http://localhost:8080/user/registerWholeSeller', userData)
+        .then(function (res) {
+
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/loggeduser');
+        })
       }
       else if (custype==="Retailer"){
         axios.post('http://localhost:8080/user/registerRetailer', userData)
+        .then(function (res) {
+
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/loggeduser');
+        })
       }
       else if (custype==="EndCustomer"){
         axios.post('http://localhost:8080/user/registerEndCustomer', userData)
+        .then(function (res) {
+
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/loggeduser');
+        })
       }
       else{
         axios.post('http://localhost:8080/user/register', userData)
+        .then(function (res) {
+
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/loggeduser');
+        })
       }
       console.log(userData);
-      props.history.push('/loggeduser');
+      //props.history.push('/loggeduser');
       event.preventDefault();
     }
     else {
