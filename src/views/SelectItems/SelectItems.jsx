@@ -5,8 +5,13 @@ import React, { Component } from "react";
 import { Dropdown } from 'react-bootstrap';
 // import { mysql } from "react";
 import './SelectItems.css';
-import './SecondButton.jsx';
-import SecondButton from "./SecondButton";
+
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
 // const mysql = require('mysql');
 // const connection = mysql.createPool({
 //   host     : 'localhost',
@@ -64,31 +69,9 @@ import SecondButton from "./SecondButton";
 //     )
 // }
 // }
-function hiddenButton() {
-    return (
-      < div >
-        {/* <h1>test 1</h1> */}
-        {/* <Dropdown.Menu>
-        <Dropdown.Item value="1">Action</Dropdown.Item>
-        <Dropdown.Item value="2">Another action</Dropdown.Item>
-        <Dropdown.Item value="3">Something else</Dropdown.Item>
-      </Dropdown.Menu> */}
 
-        <Dropdown id="buttonItems">
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Item
-        </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </Dropdown.Menu>
 
-        </Dropdown>
-      </div >
-    );
-  
-}
+
 function checkAlert(evt) {
   if (evt.target.value === "2") {
     alert('Hello');
@@ -100,7 +83,6 @@ class SelectItems extends Component {
   // var mysql = require('mysql');
   submit = (event) => {
     console.log('Selected value:', event.target.value);
-    run:SecondButton();
   }
   render() {
     return (
@@ -115,7 +97,7 @@ class SelectItems extends Component {
         </Dropdown.Toggle>
               </Dropdown> */}
               {/* <select id = "dropdown" ref = {(input)=> this.menu = input}> */}
-            <select id="dropdown" className="abc" onChange={this.submit.run}  >
+              <select id="dropdown" className="abc" onChange={this.submit.run}  >
                 <option value="N/A" >N/A</option>
                 <option value="1">1</option>
                 <option value="2" >2</option>
@@ -148,10 +130,28 @@ class SelectItems extends Component {
             </li> */}
             <li>
               <div className="secBtn"></div>
+              {/* <FormControl variant="filled" className={classes.formControl}> */}
+              <FormControl variant="filled" >
+                <InputLabel htmlFor="filled-age-native-simple">Age</InputLabel>
+                <Select
+                  native
+                  // value={state.age}
+                  // onChange={handleChange('age')}
+                  inputProps={{
+                    name: 'age',
+                    id: 'filled-age-native-simple',
+                  }}
+                >
+                  <option value="" />
+                  <option value={10}>Ten</option>
+                  <option value={20}>Twenty</option>
+                  <option value={30}>Thirty</option>
+                </Select>
+              </FormControl>
               {/* {hiddenButton()} */}
               {/* <SecondButton/> */}
             </li>
-            
+
           </ul>
           {/* </div> */}
         </div>
