@@ -20,7 +20,7 @@ import Search from "@material-ui/icons/Search";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
