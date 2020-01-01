@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 // import ReactDOM from 'react-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Dropdown } from 'react-bootstrap';
 // import { mysql } from "react";
 import './SelectItems.css';
 
