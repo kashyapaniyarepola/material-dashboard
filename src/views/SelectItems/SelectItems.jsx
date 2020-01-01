@@ -6,12 +6,12 @@ import React, { Component } from "react";
 // import { mysql } from "react";
 import './SelectItems.css';
 
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+//import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+//import NativeSelect from '@material-ui/core/NativeSelect';
 // const mysql = require('mysql');
 // const connection = mysql.createPool({
 //   host     : 'localhost',
@@ -40,7 +40,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 // }
 
 
-{/* <div>
+/* <div>
   <select defaultValue={this.state.selectValue}
     onChange={this.handleChange}
   >
@@ -49,7 +49,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
     <option value="Cherry">Cherry</option>
   </select>
   <p>{message}</p>
-</div> */}
+</div> */
 // function hiddenButton() {
 //   let res = 5;
 //   if (res == "N/A") {
@@ -72,11 +72,11 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 
 
 
-function checkAlert(evt) {
-  if (evt.target.value === "2") {
-    alert('Hello');
-  }
-}
+// function checkAlert(evt) {
+//   if (evt.target.value === "2") {
+//     alert('Hello');
+//   }
+// }
 
 
 class SelectItems extends Component {

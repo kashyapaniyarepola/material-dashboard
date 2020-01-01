@@ -10,6 +10,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Hidden from "@material-ui/core/Hidden";
 import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
+import Link from '@material-ui/core/Link';
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
@@ -18,6 +19,8 @@ import Search from "@material-ui/icons/Search";
 // core components
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
+
+import { Redirect } from 'react-router-dom';
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
@@ -45,9 +48,18 @@ export default function AdminNavbarLinks() {
     }
   };
   const handleCloseProfile = () => {
+    localStorage.removeItem('token');
     setOpenProfile(null);
   };
+
+  function isAuthenticated() {
+    const token = localStorage.getItem('token');
+    return token && token.length > 10;
+
+  }
+  const isAllreadyAuthenticated = isAuthenticated();
   return (
+    isAllreadyAuthenticated ? 
     <div>
       <div className={classes.searchWrapper}>
         <CustomInput
@@ -155,6 +167,7 @@ export default function AdminNavbarLinks() {
           )}
         </Poppers>
       </div>
+      
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -194,13 +207,13 @@ export default function AdminNavbarLinks() {
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      //onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Profile
                     </MenuItem>
                     <MenuItem
-                      onClick={handleCloseProfile}
+                     // onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings
@@ -210,6 +223,7 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
+                      <Link href="./user" variant="body2"></Link>
                       Logout
                     </MenuItem>
                   </MenuList>
@@ -219,6 +233,8 @@ export default function AdminNavbarLinks() {
           )}
         </Poppers>
       </div>
-    </div>
+    </div> : (
+      <div></div>
+    )
   );
 }

@@ -38,14 +38,6 @@ const dashboardRoutes = [
     layout: "/user"
   },
   {
-    path: "/user",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-    component: UserProfile,
-    layout: "/user"
-  },
-  {
     path: "/register",
     name: "Register",
     rtlName: "ملف تعريفي للمستخدم",
@@ -77,6 +69,42 @@ const dashboardRoutes = [
     icon: Notifications,
     component: NotificationsPage,
     layout: "/user"
+  },
+
+];
+const loggedUserRoutes = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/loggeduser"
+  },
+  {
+    path: "/user",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Person,
+    component: UserProfile,
+    layout: "/loggeduser"
+  },
+
+  {
+    path: "/items",
+    name: "Select Items",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: AddShoppingCartIcon,
+    component: SeletItems,
+    layout: "/loggeduser"
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    rtlName: "إخطارات",
+    icon: Notifications,
+    component: NotificationsPage,
+    layout: "/loggeduser"
   },
 
 ];
@@ -152,4 +180,4 @@ const staffadminRoutes = [
 
 ];
 export default dashboardRoutes;
-export { staffadminRoutes, adminRoutes };
+export { staffadminRoutes, adminRoutes,loggedUserRoutes };
