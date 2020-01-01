@@ -209,14 +209,14 @@ export default function AdminNavbarLinks(props) {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
+                <ClickAwayListener >
                   <MenuList role="menu">
-                    <MenuItem
-                      //onClick={handleCloseProfile}
+                    {/* <MenuItem
+                      onClick={handleProfile}
                       className={classes.dropdownItem}
                     >
                       Profile
-                    </MenuItem>
+                    </MenuItem> */}
                     {/* <MenuItem
                      // onClick={handleCloseProfile}
                       className={classes.dropdownItem}

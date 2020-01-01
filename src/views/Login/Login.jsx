@@ -80,6 +80,13 @@ export default function SignIn(props) {
         }
         console.log(res);
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('username', res.data.username);
+        localStorage.setItem('firstname', res.data.firstname);
+        localStorage.setItem('lastname', res.data.lastname);
+        localStorage.setItem('userType', res.data.userType);
+        localStorage.setItem('city', res.data.city);
+        localStorage.setItem('streetnumber', res.data.number);
+        localStorage.setItem('streetname', res.data.street);
        props.history.push('/loggeduser');
         return res.json();
       })
