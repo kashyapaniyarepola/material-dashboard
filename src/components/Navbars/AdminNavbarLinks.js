@@ -20,6 +20,8 @@ import Search from "@material-ui/icons/Search";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
+import { Redirect } from 'react-router-dom';
+
 
 
 //import { Redirect } from 'react-router-dom';
@@ -49,9 +51,9 @@ export default function AdminNavbarLinks(props) {
       setOpenProfile(event.currentTarget);
     }
   };
-  const handleCloseProfile = () => {
+  function handleCloseProfile() {
     localStorage.removeItem('token');
-    props.history.push('/user');
+    //props.history.push('./user');
     setOpenProfile(null);
   };
 
@@ -62,7 +64,7 @@ export default function AdminNavbarLinks(props) {
   }
   const isAllreadyAuthenticated = isAuthenticated();
   return (
-    !isAllreadyAuthenticated ? <div></div> : (
+    !isAllreadyAuthenticated ? <Redirect to={{ pathname: '/user' }} />  : (
     <div>
       <div className={classes.searchWrapper}>
         <CustomInput
