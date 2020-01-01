@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Redirect } from 'react-router-dom';
 
+
 const axios = require('axios');
 
 function Copyright() {
@@ -50,11 +51,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
+  console.log(props)
   function handleUserNameChange(event) {
     setUserName(event.target.value);
     console.log(userName);
@@ -78,6 +80,7 @@ export default function SignIn() {
         }
         console.log(res);
         localStorage.setItem('token', res.data.token);
+       props.history.push('/loggeduser');
         return res.json();
       })
       .then(resData => {
