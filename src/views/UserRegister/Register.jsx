@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function Register() {
+export default function Register(props) {
   const [username, setUserName] = useState('');
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -130,6 +130,7 @@ export default function Register() {
         axios.post('http://localhost:8080/user/register', userData)
       }
       console.log(userData);
+      props.history.push('/loggeduser');
       event.preventDefault();
     }
     else {
